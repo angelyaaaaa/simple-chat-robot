@@ -2,21 +2,42 @@ require('normalize.css/normalize.css');
 require('styles/App.css');
 
 import React from 'react';
-
-let yeomanImage = require('../images/yeoman.png');
+import ChatDisplay from './chat-display';
+import ChatType from './chat-type';
 
 class AppComponent extends React.Component {
-  render() {
-    return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-      </div>
-    );
-  }
+	constructor(props, context) {
+		super(props, context);
+		this.state = {};
+		// this.handleChange = this.handleChange.bind(this);
+		// this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	
+	componentWillMount() {
+  // 		let body = {'stat': {'lo':'會議' },'in':'開.開開燈燈..'};
+		// let myParam = {
+		// 	method: 'POST',
+		// 	'Content-Type': 'application/json',
+		// 	body: body
+		// };
+		// fetch('http://demo3.crowdinsight.com.tw/schideron/v1/parse', myParam)
+		// 	.then(response => response.json() )
+		// 	.then(data => {
+		// 		console.log('-----------------');
+		// 		console.log(data);
+		// });
+	}
+
+    render() {
+        return (
+            <div className="App">
+            	<ChatDisplay/>
+            	<ChatType/>
+      		</div>
+        );
+    }
 }
 
-AppComponent.defaultProps = {
-};
+AppComponent.defaultProps = {};
 
 export default AppComponent;

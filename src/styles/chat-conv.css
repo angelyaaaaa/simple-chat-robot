@@ -1,0 +1,25 @@
+.conv {
+	width: 100%;
+}
+.conv .display-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid;
+}
+.conv .display-text {
+	border-radius: 1.3em;
+    border: 1px solid white;
+    line-height: 35px;
+    background-color: lightblue;
+    color: white;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px 15px;
+}
+.chat-you {
+	text-align: right;
+}
+.chat-others {
+    text-align: left;
+}
