@@ -6,15 +6,9 @@ class ChatDisplay extends React.Component {
     render() {
         return (
             <div className="chat-display">
-            	<ChatConv role="others" text="chat-display"/>
-            	<ChatConv role="you" text="chat-display1"/>
-            	<ChatConv role="others" text="chat-display"/>
-            	<ChatConv role="others" text="chat-display"/>
-            	<ChatConv role="you" text="chat-display1"/>
-            	<ChatConv role="others" text="chat-display"/>
-            	<ChatConv role="you" text="chat-display1"/>
-            	<ChatConv role="you" text="chat-display1"/>
-            	
+            	{this.props.chatDetail.map((item)=> {
+        			return <ChatConv role={item.role} text={item.text} key={'chatConv_'+item.id}/>
+            	})}
       		</div>
         );
     }

@@ -8,30 +8,45 @@ import ChatType from './chat-type';
 class AppComponent extends React.Component {
 	constructor(props, context) {
 		super(props, context);
-		this.state = {};
+		this.state = {
+			chatDetail: [
+				{id: 1, role: 'others', text: 'chat-display'},
+				{id: 2, role: 'you', text: 'chat-display1'},
+				{id: 3, role: 'others', text: 'chat-display'},
+				{id: 4, role: 'others', text: 'chat-display'},
+				{id: 5, role: 'you', text: 'chat-display1'},
+				{id: 6, role: 'others', text: 'chat-display'},
+				{id: 7, role: 'you', text: 'chat-display1'},
+				{id: 8, role: 'you', text: 'chat-display1'}
+			]
+
+		};
 		// this.handleChange = this.handleChange.bind(this);
 		// this.handleSubmit = this.handleSubmit.bind(this);
 	}
-	
+
 	componentWillMount() {
-  // 		let body = {'stat': {'lo':'會議' },'in':'開.開開燈燈..'};
-		// let myParam = {
-		// 	method: 'POST',
-		// 	'Content-Type': 'application/json',
-		// 	body: body
-		// };
-		// fetch('http://demo3.crowdinsight.com.tw/schideron/v1/parse', myParam)
-		// 	.then(response => response.json() )
-		// 	.then(data => {
-		// 		console.log('-----------------');
-		// 		console.log(data);
-		// });
+  		let body = {'stat': {'lo':'會議' },'in':'開.開開燈燈..'};
+		let myParam = {
+			// method: 'POST',
+			method: 'OPTION',
+			'Content-Type': 'application/json',
+			body: body
+		};
+		fetch('http://demo3.crowdinsight.com.tw/schideron/v1/parse', myParam)
+			.then(response => response.json() )
+			.then(data => {
+				console.log('-----------------');
+				console.log(data);
+			});
 	}
+
+
 
     render() {
         return (
             <div className="App">
-            	<ChatDisplay/>
+            	<ChatDisplay chatDetail={this.state.chatDetail}/>
             	<ChatType/>
       		</div>
         );
