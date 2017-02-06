@@ -18,11 +18,10 @@ class AppComponent extends React.Component {
 				{id: 6, role: 'others', text: 'chat-display'},
 				{id: 7, role: 'you', text: 'chat-display1'},
 				{id: 8, role: 'you', text: 'chat-display1'}
-			]
-
+			],
+			count: 8
 		};
-		// this.handleChange = this.handleChange.bind(this);
-		// this.handleSubmit = this.handleSubmit.bind(this);
+		this.updateChatDetail = this.updateChatDetail.bind(this);
 	}
 
 	componentWillMount() {
@@ -41,13 +40,20 @@ class AppComponent extends React.Component {
 			});
 	}
 
-
+	updateChatDetail(item) {
+		let newChatDetail = this.state.chatDetail;
+		let newCount = ++this.state.count;
+		console.log(newCount);
+		const tempChat = {id: newCount, role: item.role, text: item.text}
+		newChatDetail.push(tempChat);
+		this.setState({chatDetail: newChatDetail, count: newCount});
+	}
 
     render() {
         return (
             <div className="App">
             	<ChatDisplay chatDetail={this.state.chatDetail}/>
-            	<ChatType/>
+            	<ChatType updateChatDetail={this.updateChatDetail}/>
       		</div>
         );
     }
