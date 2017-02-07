@@ -44,7 +44,7 @@ class AppComponent extends React.Component {
 		let newChatDetail = this.state.chatDetail;
 		let newCount = ++this.state.count;
 		console.log(newCount);
-		const tempChat = {id: newCount, role: item.role, text: item.text}
+		const tempChat = Object.assign({id:newCount}, item); 
 		newChatDetail.push(tempChat);
 		this.setState({chatDetail: newChatDetail, count: newCount});
 	}
