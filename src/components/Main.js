@@ -32,12 +32,12 @@ class AppComponent extends React.Component {
 			'Content-Type': 'application/json',
 			body: body
 		};
-		fetch('http://demo3.crowdinsight.com.tw/schideron/v1/parse', myParam)
-			.then(response => response.json() )
-			.then(data => {
-				console.log('-----------------');
-				console.log(data);
-			});
+		// fetch('http://demo3.crowdinsight.com.tw/schideron/v1/parse', myParam)
+		// 	.then(response => response.json() )
+		// 	.then(data => {
+		// 		console.log('-----------------');
+		// 		console.log(data);
+		// 	});
 	}
 
 	updateChatDetail(item) {
