@@ -1,6 +1,16 @@
 require('styles/chat-type.css');
 import React from 'react';
 
+const checkStr = (input)=> {
+	let output = input;
+	const lineMax = 120;
+	if(input.length > 120) {
+		output = input.slice(0, 120) + '\n' + input.slice(120, input.length);		
+	}
+	console.log(output);
+	return output;
+}
+
 class ChatType extends React.Component {
 	constructor(props, context) {
 		super(props, context);
@@ -16,17 +26,16 @@ class ChatType extends React.Component {
 	}
 
 	submitMsg() {
-		this.props.updateChatDetail({role: 'you', text: this.state.chatValue});
+
+		this.props.updateChatDetail({role: 'you', text: checkStr(this.state.chatValue)});
 		this.setState({chatValue: ''});
 	}
 
 	handleKeyUp(e) {
-		// console.log(e);
-		console.log(e.key);
-		// window.xxx = e.persist();
-		// if(e.)
 		if(e.key === 'Enter'){
 			this.submitMsg();
+		} else if(e.key === 'Escape') {
+			this.setState({chatValue: ''});
 		}
 	}
 
@@ -49,6 +58,8 @@ class ChatType extends React.Component {
         );
     }
 }
+
+
 
 ChatType.defaultProps = {};
 
