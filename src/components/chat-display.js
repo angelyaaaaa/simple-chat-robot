@@ -26,7 +26,7 @@ class ChatDisplay extends React.Component {
     render() {
         return (
             <div className="chat-display">
-            	{this.props.chatDetail.map((item)=> {
+            	{this.props.chatList.map((item)=> {
         			return <ChatConv role={item.role} text={item.text} key={'chatConv_'+item.id}/>
             	})}
             	<div ref={(ref) => { this.messagesEnd = ref; }}></div>

@@ -9,51 +9,61 @@ class AppComponent extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			chatDetail: [
-				{id: 1, role: 'others', text: 'chat-display'},
-				{id: 2, role: 'you', text: 'chat-display1'},
-				{id: 3, role: 'others', text: 'chat-display'},
-				{id: 4, role: 'others', text: 'chat-display'},
-				{id: 5, role: 'you', text: 'chat-display1'},
-				{id: 6, role: 'others', text: 'chat-display'},
-				{id: 7, role: 'you', text: 'chat-display1'},
-				{id: 8, role: 'you', text: 'chat-display1'}
+			chatList: [
+				{id: 1, role: 'others', text: '你好，我是開燈機器人'},
+				{id: 2, role: 'you', text: '安安你好給虧嗎?'},
+				{id: 3, role: 'others', text: '我不懂你在說什麼'},
+				{id: 4, role: 'others', text: '你好，我是開燈機器人'},
+				{id: 5, role: 'you', text: '怎麼稱呼?'},
+				{id: 6, role: 'others', text: '我是開燈機器人唷，專長是開燈'},
+				{id: 7, role: 'you', text: '這樣阿'},
+				{id: 8, role: 'you', text: '那我要下指令囉'}
 			],
 			count: 8
 		};
-		this.updateChatDetail = this.updateChatDetail.bind(this);
+		this.updateChatList = this.updateChatList.bind(this);
+		this.respByRobot = this.respByRobot.bind(this);
 	}
 
-	componentWillMount() {
-  		let body = {'stat': {'lo':'會議' },'in':'開.開開燈燈..'};
+
+	componentWillMount() {}
+
+	respByRobot(input) {
+		let body = {'state': {'loc':'會議' },'inp': input};
 		let myParam = {
-			// method: 'POST',
-			method: 'OPTION',
-			'Content-Type': 'application/json',
-			body: body
-		};
-		// fetch('http://demo3.crowdinsight.com.tw/schideron/v1/parse', myParam)
-		// 	.then(response => response.json() )
-		// 	.then(data => {
-		// 		console.log('-----------------');
-		// 		console.log(data);
-		// 	});
+	      	method: 'POST',
+	      	headers: {
+		        'Content-Type': 'application/json'
+	      	},
+	      	body: JSON.stringify(body)
+	    };
+		fetch('http://demo3.crowdinsight.com.tw/schideron/v1/parse', myParam)
+			.then(response => response.json() )
+			.then(data => {
+				const newCount = ++this.state.count;
+				const newChat = {id: newCount, role: 'others', text: data.text}
+				const newChatList = this.state.chatList;
+				newChatList.push(newChat);
+
+				this.setState({chatList: newChatList, count: newCount});
+			});
 	}
 
-	updateChatDetail(item) {
-		let newChatDetail = this.state.chatDetail;
-		let newCount = ++this.state.count;
-		console.log(newCount);
-		const tempChat = Object.assign({id:newCount}, item); 
-		newChatDetail.push(tempChat);
-		this.setState({chatDetail: newChatDetail, count: newCount});
+	updateChatList(item) {
+		const newCount = ++this.state.count;
+		const newChat = Object.assign({id:newCount}, item); 
+		const newChatList = this.state.chatList;
+		newChatList.push(newChat);
+		
+		this.setState({chatList: newChatList, count: newCount});
+		this.respByRobot(item.text);
 	}
 
     render() {
         return (
             <div className="App">
-            	<ChatDisplay chatDetail={this.state.chatDetail}/>
-            	<ChatType updateChatDetail={this.updateChatDetail}/>
+            	<ChatDisplay chatList={this.state.chatList}/>
+            	<ChatType updateChatList={this.updateChatList}/>
       		</div>
         );
     }

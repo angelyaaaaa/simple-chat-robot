@@ -27,7 +27,7 @@ class ChatType extends React.Component {
 
 	submitMsg() {
 
-		this.props.updateChatDetail({role: 'you', text: checkStr(this.state.chatValue)});
+		this.props.updateChatList({role: 'you', text: checkStr(this.state.chatValue)});
 		this.setState({chatValue: ''});
 	}
 
