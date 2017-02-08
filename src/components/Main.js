@@ -41,11 +41,18 @@ class AppComponent extends React.Component {
 			.then(response => response.json() )
 			.then(data => {
 				const newCount = ++this.state.count;
-				const newChat = {id: newCount, role: 'others', text: data.text}
+				let newChat = {id: newCount, role: 'others', text: '...'}
 				const newChatList = this.state.chatList;
 				newChatList.push(newChat);
 
 				this.setState({chatList: newChatList, count: newCount});
+
+				setTimeout(()=> { 
+					console.log(this);
+					console.log(newCount);
+					newChatList[newCount-1] = {id: newCount, role: 'others', text: data.text};
+					this.setState({chatList: newChatList, count: newCount});
+				}, 1000);
 			});
 	}
 
