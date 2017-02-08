@@ -19,17 +19,23 @@ class AppComponent extends React.Component {
 				{id: 7, role: 'you', text: '這樣阿'},
 				{id: 8, role: 'you', text: '那我要下指令囉'}
 			],
-			count: 8
+			count: 8,
+			chatState: {}
 		};
 		this.updateChatList = this.updateChatList.bind(this);
+		this.openNewChat = this.openNewChat.bind(this);
 		this.respByRobot = this.respByRobot.bind(this);
 	}
 
 
 	componentWillMount() {}
 
-	respByRobot(input) {
-		let body = {'state': {'loc':'會議' },'inp': input};
+	respByRobot(input, isNewChat) {
+		let body = {'state': this.state.chatState,'inp': input};
+		if(isNewChat) {
+			body.state = {};
+		}
+
 		let myParam = {
 	      	method: 'POST',
 	      	headers: {
@@ -51,7 +57,7 @@ class AppComponent extends React.Component {
 					// console.log(this);
 					// console.log(newCount);
 					newChatList[newCount-1] = {id: newCount, role: 'others', text: data.text};
-					this.setState({chatList: newChatList, count: newCount});
+					this.setState({chatList: newChatList, count: newCount, chatState: isNewChat ? {} : data.state});
 				}, 1000);
 			});
 	}
@@ -66,11 +72,21 @@ class AppComponent extends React.Component {
 		this.respByRobot(item.text);
 	}
 
+	openNewChat(item) {
+		const newCount = ++this.state.count;
+		const newChat = Object.assign({id:newCount}, item);
+		const newChatList = this.state.chatList;
+		newChatList.push(newChat);
+
+		this.setState({chatList: newChatList, count: newCount, chatState: {}});
+		this.respByRobot(item.text, true);
+	}
+
     render() {
         return (
             <div className="App">
             	<ChatDisplay chatList={this.state.chatList}/>
-            	<ChatType updateChatList={this.updateChatList}/>
+            	<ChatType updateChatList={this.updateChatList} openNewChat={this.openNewChat}/>
       		</div>
         );
     }

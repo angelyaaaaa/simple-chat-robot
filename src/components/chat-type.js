@@ -16,8 +16,10 @@ class ChatType extends React.Component {
 		this.state = {chatValue: ''};
 		this.handleChange = this.handleChange.bind(this);
 		this.submitMsg = this.submitMsg.bind(this);
+		this.submitNewMsg = this.submitNewMsg.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleKeyUp = this.handleKeyUp.bind(this);
+		this.handleNewSubmit = this.handleNewSubmit.bind(this);
+		this.handleKeyPress = this.handleKeyPress.bind(this);
 	}
 
 	handleChange(e) {
@@ -25,14 +27,22 @@ class ChatType extends React.Component {
 	}
 
 	submitMsg() {
-
 		this.props.updateChatList({role: 'you', text: checkStr(this.state.chatValue)});
 		this.setState({chatValue: ''});
 	}
 
-	handleKeyUp(e) {
+	submitNewMsg() {
+		console.log('-------new chat');
+		this.props.openNewChat({role: 'you', text: checkStr(this.state.chatValue)});
+		this.setState({chatValue: ''});
+	}
+
+	handleKeyPress(e) {
+		console.log(e.ctrlKey, e.key, e.shiftKey);
 		if(e.key === 'Enter'){
 			this.submitMsg();
+		} else if(e.key === 'Enter' && e.ctrlKey) {
+			this.submitNewMsg();
 		} else if(e.key === 'Escape') {
 			this.setState({chatValue: ''});
 		}
@@ -43,6 +53,10 @@ class ChatType extends React.Component {
 		this.submitMsg();
 	}
 
+	handleNewSubmit(e) {
+		this.submitNewMsg();
+	}
+
 
     render() {
         return (
@@ -50,10 +64,10 @@ class ChatType extends React.Component {
             	<textarea className="typeArea" placeholder="輸入訊息...."
             			value={this.state.chatValue}
             			onChange={this.handleChange}
-            			onKeyUp={this.handleKeyUp}
-            			></textarea>
+            			onKeyPress={this.handleKeyPress}
+            	></textarea>
     			<div className="typeButton">
-	            	<button className="_clear" onClick={this.handleSubmit}>清除</button>
+	            	<button className="_newSubmit" onClick={this.handleNewSubmit}>新對話</button>
 	            	<button className="_submit" onClick={this.handleSubmit}>送出</button>
     			</div>
       		</div>
