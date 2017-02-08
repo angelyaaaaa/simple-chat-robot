@@ -8,11 +8,11 @@ class ChatDisplay extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 		this.scrollToBottom = this.scrollToBottom.bind(this);
-	}	
+	}
 	
 	scrollToBottom() {
 		const node = ReactDOM.findDOMNode(this.messagesEnd);
-    	node.scrollIntoView({behavior: "smooth"});
+    	node.scrollIntoView({behavior: 'smooth'});
 	}
 
 	componentDidMount() {

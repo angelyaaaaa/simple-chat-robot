@@ -4,10 +4,9 @@ import React from 'react';
 const checkStr = (input)=> {
 	let output = input;
 	const lineMax = 120;
-	if(input.length > 120) {
-		output = input.slice(0, 120) + '\n' + input.slice(120, input.length);		
+	if(input.length > lineMax) {
+		output = input.slice(0, lineMax) + '\n' + input.slice(lineMax, input.length);
 	}
-	console.log(output);
 	return output;
 }
 
@@ -48,12 +47,15 @@ class ChatType extends React.Component {
     render() {
         return (
             <div className="chat-type">
-            	<textarea className="typeArea" placeholder="輸入訊息...." 
-            			value={this.state.chatValue} 
+            	<textarea className="typeArea" placeholder="輸入訊息...."
+            			value={this.state.chatValue}
             			onChange={this.handleChange}
             			onKeyUp={this.handleKeyUp}
             			></textarea>
-            	<button className="typeSubmit" onClick={this.handleSubmit}>送出</button>
+    			<div className="typeButton">
+	            	<button className="_clear" onClick={this.handleSubmit}>清除</button>
+	            	<button className="_submit" onClick={this.handleSubmit}>送出</button>
+    			</div>
       		</div>
         );
     }

@@ -8,7 +8,7 @@ class ChatConv extends React.Component {
     			<div className="chat-you conv">
 	            	<div className="display-text">{this.props.text}</div>
 	            	<img className="display-icon" src="../images/me.png" alt="me"/>
-	            </div>  
+	            </div>
     		);
     	} else {
     		return (

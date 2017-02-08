@@ -10,8 +10,21 @@
 	width: 85%;
 	height: 94%;		
 }
-.typeSubmit {
-	width: 14%; 
-    height: 100%;
+.typeButton {
+	display: inline-block;
+	width: 14%;
+	height: 100%;
     vertical-align: top;
 }
+.typeButton button {
+	width: 100%;
+	display: block;
+}
+
+._submit {
+	height: 60%;
+}
+._clear {
+	height: 40%;
+}
+
