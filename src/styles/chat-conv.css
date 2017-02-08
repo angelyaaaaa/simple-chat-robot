@@ -23,3 +23,10 @@
 .chat-others {
     text-align: left;
 }
+
+.chat-newTag {
+    text-align: center;
+}
+.chat-newTag .display-text {
+    background-color: grey;
+}

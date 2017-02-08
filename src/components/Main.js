@@ -79,7 +79,6 @@ class AppComponent extends React.Component {
 		newChatList.push(newChat);
 
 		this.setState({chatList: newChatList, count: newCount, chatState: {}});
-		this.respByRobot(item.text, true);
 	}
 
     render() {

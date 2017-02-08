@@ -10,14 +10,20 @@ class ChatConv extends React.Component {
 	            	<img className="display-icon" src="../images/me.png" alt="me"/>
 	            </div>
     		);
-    	} else {
+    	} else if(this.props.role === 'others') {
     		return (
     			<div className="chat-others conv">
 	            	<img className="display-icon" src="../images/robot.png" alt="robot"/>
 	            	<div className="display-text">{this.props.text}</div>
 	            </div>
     		);
-    	}
+    	} else {
+            return (
+                <div className="chat-newTag conv">
+                    <div className="display-text">{this.props.text}</div>
+                </div>
+            );
+        }
     }
 }
 

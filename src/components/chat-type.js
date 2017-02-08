@@ -32,9 +32,7 @@ class ChatType extends React.Component {
 	}
 
 	submitNewMsg() {
-		console.log('-------new chat');
-		this.props.openNewChat({role: 'you', text: checkStr(this.state.chatValue)});
-		this.setState({chatValue: ''});
+		this.props.openNewChat({role: 'newTag', text: '開啟新對話'});
 	}
 
 	handleKeyPress(e) {
