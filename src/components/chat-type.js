@@ -36,12 +36,15 @@ class ChatType extends React.Component {
 	}
 
 	handleKeyPress(e) {
-		console.log(e.ctrlKey, e.key, e.shiftKey);
+		// console.log(e.ctrlKey, e.key, e.shiftKey);
 		if(e.key === 'Enter'){
+			e.preventDefault();
 			this.submitMsg();
 		} else if(e.key === 'Enter' && e.ctrlKey) {
+			e.preventDefault();
 			this.submitNewMsg();
 		} else if(e.key === 'Escape') {
+			e.preventDefault();
 			this.setState({chatValue: ''});
 		}
 	}

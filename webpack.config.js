@@ -2,7 +2,7 @@
 
 const path = require('path');
 const args = require('minimist')(process.argv.slice(2));
-
+const wpack = require('webpack');
 // List of allowed environments
 const allowedEnvs = ['dev', 'dist', 'test'];
 
@@ -26,6 +26,13 @@ function buildConfig(wantedEnv) {
   let isValid = wantedEnv && wantedEnv.length > 0 && allowedEnvs.indexOf(wantedEnv) !== -1;
   let validEnv = isValid ? wantedEnv : 'dev';
   let config = require(path.join(__dirname, 'cfg/' + validEnv));
+
+  config.entry = ['whatwg-fetch', './src/index.js'];
+  config. plugins = [
+        new wpack.ProvidePlugin({
+            'Promise': 'es6-promise', // Thanks Aaron (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602)
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        })]      
   return config;
 }
 
